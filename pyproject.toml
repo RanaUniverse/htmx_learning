@@ -1,0 +1,9 @@
+[project]
+name = "htmx-learning"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14.0"
+dependencies = [
+    "flask>=3.1.3",
+]
