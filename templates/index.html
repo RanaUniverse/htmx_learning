@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<!-- Main Content -->
+<main>
+    <!-- Hero -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Welcome to Rana Universe</h1>
+            <p class="lead mt-3">
+                Building modern web applications with Flask & Bootstrap 5.
+            </p>
+
+            A name is generating in the backend and it will come here below
+            <br>
+            <div class="btn btn-primary">
+                {{ data }}
+            </div>
+            <br>
+
+            <a href="#" class="btn btn-light btn-lg mt-3">
+                Get Started
+            </a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h4>⚡ Fast</h4>
+                            <p>Optimized and responsive Bootstrap design.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h4>🔒 Secure</h4>
+                            <p>Perfect structure for Flask backend integration.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h4>🎨 Modern</h4>
+                            <p>Clean UI with Bootstrap 5 components.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
