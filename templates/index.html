@@ -1,10 +1,78 @@
-{% extends 'base.html' %}
-
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <!-- Main Content -->
 <main>
+    <button hx-get="/messages">Load Messages</button>
+
+    <div hx-post="/mouse_entered" hx-trigger="mouseenter delay:1s">
+        Mouse Trap
+        <br />
+        Mouse Trap
+        <br />
+        Mouse Trap
+    </div>
+
+    <input
+        type="text"
+        name="q"
+        placeholder="Search..."
+        hx-get="/search"
+        hx-trigger="input delay:500ms, keyup[key=='Enter']"
+        hx-target="#search-results"
+    />
+
+    <div id="search-results"></div>
+    <br />
+    <div hx-get="/shift_clicked" hx-trigger="click[ctrlKey]">
+        Shift Click Me Shift Click Me Shift Click Me
+    </div>
+
+    <button hx-get="/click" hx-target="#result" hx-swap="innerHTML">
+        Click Me!
+
+        <img
+            class="htmx-indicator"
+            src="https://htmx.org/img/bars.svg"
+            alt="Loading"
+        />
+    </button>
+    <div id="result" class="result"></div>
+    <br />
+    Rana Thanks
+    <br />
+    <br />
+    <br />
+    <br />
+    <!-- <button
+        hx-delete="/account"
+        hx-confirm="Are you sure you wish to delete your account?"
+    >
+        Delete My Account
+    </button> -->
+
+    <button hx-delete="/account" id="delete-btn" hx-confirm="js:swalConfirm()">
+        > Delete My Account
+    </button>
+
+    <button hx-get="/get-status" hx-target="this">Check Server Status</button>
+
+    <div class="user-card" style="border: 1px solid gray; padding: 10px">
+        <h4>User Profile: Rana</h4>
+
+        <button hx-delete="/user/1" hx-target="closest .user-card">
+            Delete User
+        </button>
+    </div>
+
+    <div
+        hx-get="/get-live-counter"
+        hx-trigger="click"
+        hx-target="find .counter-val"
+    >
+        <p>Click anywhere in this box to update numbers.</p>
+        Active Users: <span class="counter-val">0</span>
+    </div>
+
     <!-- Hero -->
     <section class="hero-section text-center">
         <div class="container">
@@ -14,15 +82,28 @@
             </p>
 
             A name is generating in the backend and it will come here below
-            <br>
+            <br />
+            <!--
             <div class="btn btn-primary">
                 {{ data }}
-            </div>
-            <br>
+            </div> -->
 
-            <a href="#" class="btn btn-light btn-lg mt-3">
-                Get Started
-            </a>
+            <div id="name-container">
+                <div class="btn btn-primary">{{ data }}</div>
+            </div>
+
+            <button
+                class="btn btn-success mt-3"
+                hx-get="/random-name"
+                hx-target="#name-container"
+                hx-swap="innerHTML"
+            >
+                Generate New Name
+            </button>
+
+            <br />
+
+            <a href="#" class="btn btn-light btn-lg mt-3"> Get Started </a>
         </div>
     </section>
 
@@ -30,7 +111,6 @@
     <section class="py-5">
         <div class="container">
             <div class="row g-4">
-
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
@@ -44,7 +124,9 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <h4>🔒 Secure</h4>
-                            <p>Perfect structure for Flask backend integration.</p>
+                            <p>
+                                Perfect structure for Flask backend integration.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -57,9 +139,38 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 </main>
+
+<button>Rana</button>
+
+<div hx-confirm:inherited="Are you sure?">
+    <button hx-delete="/account">Delete Account</button>
+
+    <button hx-get="/help" hx-disinherit="hx-confirm">
+        Get Help Quickly (No Popup!)
+    </button>
+</div>
+
+<script>
+    async function swalConfirm() {
+        // This displays the beautiful modal configuration
+        let result = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        });
+
+        // This returns true (if they clicked delete) or false (if they canceled)
+        // htmx receives this value and decides whether to send the request
+        return result.isConfirmed;
+    }
+</script>
+
 {% endblock %}
