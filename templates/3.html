@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <title>HTMX Debug Example</title>
+
+        <!-- HTMX -->
+        <script src="{{ url_for('static', filename='js/htmx.min.js' ) }}"></script>
+
+        <script>
+            // htmx.config.transitions = true;
+        </script>
+    </head>
+    <body>
+        <button
+            hx-get="/hello"
+            hx-target="#result
+        "
+        >
+            Load Message
+        </button>
+        <div id="result">
+            <h1>Old Content</h1>
+        </div>
+
+        <button hx-get="/welcome" hx-target="#result" hx-swap="innerHTML">
+            Welcome
+        </button>
+    </body>
+</html>

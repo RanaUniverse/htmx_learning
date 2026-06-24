@@ -127,6 +127,14 @@ def two_page():
     )
 
 
+@app.route(rule="/3")
+def three_page():
+
+    return render_template(
+        "3.html",
+    )
+
+
 @app.route(rule="/get-status")
 def two_page2():
 
