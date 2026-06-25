@@ -120,6 +120,12 @@ def click():
     return "<p>Request completed!</p>"
 
 
+@app.post("/new-link")
+def new_link():
+    time.sleep(2)
+    return '<a href="/done">Done!</a>'
+
+
 @app.route("/hello")
 def hello_small():
     return "<p>Done!</p>"

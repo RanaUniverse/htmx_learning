@@ -35,5 +35,27 @@
     Mouse Enter Here
 </div>
 <!-- this custom event is in the script in the base file -->
+<p>New below seracth with keyup</p>
+
+<input
+    placeholder="serach here for with Enter"
+    hx-target="#results"
+    hx-get="/search"
+    hx-trigger="keyup[key == 'Enter'], input changed delay:1s"
+    hx-indicator="#spinner"
+    hx-swap="beforeend"
+    name="q"
+/>
+
+<p>New Link Below</p>
+
+<a
+    hx-post="/new-link"
+    hx-target="#results"
+    hx-indicator="#spinner"
+    hx-swap="afterend"
+>
+    New link
+</a>
 
 {% endblock %}
