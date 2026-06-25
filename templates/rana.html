@@ -15,7 +15,7 @@
     name="q"
     placeholder="Search..."
     hx-get="/search"
-    hx-trigger="input delay:1s"
+    hx-trigger="input delay:1s, mouseenter delay:1s"
     hx-target="#results"
     hx-indicator="#spinner"
 />
@@ -30,5 +30,10 @@
 >
     1 Click Me!
 </button>
+
+<div id="box" hx-get="/search" hx-trigger="searchNow" hx-target="#results">
+    Mouse Enter Here
+</div>
+<!-- this custom event is in the script in the base file -->
 
 {% endblock %}
