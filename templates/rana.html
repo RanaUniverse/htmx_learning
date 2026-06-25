@@ -1,9 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 <h1>Thanks</h1>
+
 <div class="htmx-indicator" id="spinner">
-    <img src="{{ url_for('static', filename='animation/rana_round.svg' ) }}" alt="Loading" />
+    <img
+        src="{{ url_for('static', filename='animation/rana_round.svg' ) }}"
+        alt="Loading"
+    />
     <br />
 </div>
+
 <h1>Try it</h1>
 <input
     type="text"

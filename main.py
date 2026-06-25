@@ -116,7 +116,7 @@ def index_page():
 
 @app.route("/click")
 def click():
-    time.sleep(2)
+    time.sleep(5)
     return "<p>Request completed!</p>"
 
 
