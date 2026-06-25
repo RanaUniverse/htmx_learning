@@ -26,10 +26,30 @@ DATA = [
 ]
 
 
+def is_htmx() -> bool:
+    return request.headers.get("HX-Request") == "true"
+
+
 @app.route("/search")
 def search():
+    time.sleep(2)
+    print("xxx")
+    print(
+        "Remote addr",
+        request.remote_addr,
+    )
+    print(request)
+
+    if is_htmx():
+        print("This is from htmx.")
+    else:
+        print("This is not from htmx from normal get.")
+
+    print("yyy")
     q = request.args.get("q", "").lower()
     print(request.headers)
+    print("zzz")
+    print(request.args.get("q"))
 
     results = [item for item in DATA if q in item.lower()]
 
@@ -155,6 +175,21 @@ def welcome():
 @app.route("/lazy")
 def lazy():
     return "<p>Lazy loaded content 👀</p>"
+
+
+@app.route("/rana")
+def rana_page():
+    return render_template(
+        template_name_or_list="rana.html",
+    )
+
+
+@app.route("/example")
+def example_get():
+    import random
+
+    x = random.randint(1, 11111111)
+    return f"<u>Thanks {x}</u>"
 
 
 @app.route(rule="/about")

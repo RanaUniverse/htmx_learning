@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Thanks</h1>
+<div class="htmx-indicator" id="spinner">
+    <img src="{{ url_for('static', filename='animation/rana_round.svg' ) }}" alt="Loading" />
+    <br />
+</div>
+<h1>Try it</h1>
+<input
+    type="text"
+    name="q"
+    placeholder="Search..."
+    hx-get="/search"
+    hx-trigger="input delay:1s"
+    hx-target="#results"
+    hx-indicator="#spinner"
+/>
+
+<div id="results">Old Data Nothing Now...</div>
+
+<button
+    hx-get="/click"
+    hx-target="#results"
+    hx-swap="innerHTML"
+    hx-indicator="#spinner"
+>
+    1 Click Me!
+</button>
+
+{% endblock %}
