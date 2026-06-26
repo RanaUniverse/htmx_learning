@@ -2,6 +2,9 @@
 
 <!-- Main Content -->
 <main>
+    Nonce Value is:
+    <b> {{g.nonce}} </b>
+
     <button hx-get="/messages">Load Messages</button>
 
     <div hx-post="/mouse_entered" hx-trigger="mouseenter delay:1s">
@@ -12,14 +15,8 @@
         Mouse Trap
     </div>
 
-    <input
-        type="text"
-        name="q"
-        placeholder="Search..."
-        hx-get="/search"
-        hx-trigger="input delay:500ms, keyup[key=='Enter']"
-        hx-target="#search-results"
-    />
+    <input type="text" name="q" placeholder="Search..." hx-get="/search"
+        hx-trigger="input delay:500ms, keyup[key=='Enter']" hx-target="#search-results" />
 
     <div id="search-results"></div>
     <br />
@@ -30,11 +27,7 @@
     <button hx-get="/click" hx-target="#result" hx-swap="innerHTML">
         Click Me!
 
-        <img
-            class="htmx-indicator"
-            src="https://htmx.org/img/bars.svg"
-            alt="Loading"
-        />
+        <img class="htmx-indicator" src="https://htmx.org/img/bars.svg" alt="Loading" />
     </button>
     <div id="result" class="result"></div>
     <br />
@@ -64,11 +57,7 @@
         </button>
     </div>
 
-    <div
-        hx-get="/get-live-counter"
-        hx-trigger="click"
-        hx-target="find .counter-val"
-    >
+    <div hx-get="/get-live-counter" hx-trigger="click" hx-target="find .counter-val">
         <p>Click anywhere in this box to update numbers.</p>
         Active Users: <span class="counter-val">0</span>
     </div>
@@ -92,12 +81,7 @@
                 <div class="btn btn-primary">{{ data }}</div>
             </div>
 
-            <button
-                class="btn btn-success mt-3"
-                hx-get="/random-name"
-                hx-target="#name-container"
-                hx-swap="innerHTML"
-            >
+            <button class="btn btn-success mt-3" hx-get="/random-name" hx-target="#name-container" hx-swap="innerHTML">
                 Generate New Name
             </button>
 
@@ -154,7 +138,7 @@
     </button>
 </div>
 
-<script>
+<script nonce="{{g.nonce}}">
     async function swalConfirm() {
         // This displays the beautiful modal configuration
         let result = await Swal.fire({
@@ -171,6 +155,28 @@
         // htmx receives this value and decides whether to send the request
         return result.isConfirmed;
     }
+</script>
+
+
+
+<script nonce="{{g.nonce}}">
+    function showPopup() {
+        const popup = document.createElement("div");
+        popup.className = "popup";
+        popup.innerHTML = `
+    <h2>Hello!</h2>
+    <p>This is a custom popup.</p>
+    <button onclick="this.parentElement.remove()">Close</button>
+  `;
+
+        document.body.appendChild(popup);
+    }
+
+    window.onload = function () {
+        setTimeout(function () {
+            alert("⚠️ Warning: Please review this page before continuing.");
+        }, 2000);
+    };
 </script>
 
 {% endblock %}

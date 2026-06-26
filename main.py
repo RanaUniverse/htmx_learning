@@ -1,5 +1,9 @@
+import secrets
+
+
 import time
 
+from flask import Response, g
 from flask import Flask, render_template
 from flask import request
 import fake_data
@@ -8,6 +12,30 @@ from time_data import get_now_time_in_str
 app = Flask(__name__)
 
 i = 0
+
+
+@app.context_processor
+def inject_globals():
+    return {
+        "now_str_time": get_now_time_in_str(),
+        "site_name": "🚀 Rana Universe",
+    }
+
+
+@app.before_request
+def generate_nonce():
+    g.nonce = secrets.token_hex(16)
+
+
+@app.after_request
+def modefy_headers(response: Response):
+    response.headers["Content-Security-Policy"] = (
+        f"script-src 'self' "
+        f"https://cdn.jsdelivr.net "
+        f"'nonce-{g.nonce}'; "
+        f"style-src 'self' https://cdn.jsdelivr.net 'nonce-{g.nonce}'; "
+    )
+    return response
 
 
 @app.route("/shift_clicked")
@@ -94,14 +122,6 @@ def htmx1():
 # @app.route("/random-name")
 # def random_name():
 #     return fake_data.generate_fake_name()
-
-
-@app.context_processor
-def inject_globals():
-    return {
-        "now_str_time": get_now_time_in_str(),
-        "site_name": "🚀 Rana Universe",
-    }
 
 
 @app.route(rule="/")
