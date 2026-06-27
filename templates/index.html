@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+
+
+{% block content %}
 
 <!-- Main Content -->
 <main>
@@ -27,7 +31,7 @@
     <button hx-get="/click" hx-target="#result" hx-swap="innerHTML">
         Click Me!
 
-        <img class="htmx-indicator" src="https://htmx.org/img/bars.svg" alt="Loading" />
+        <img class="htmx-indicator" src="{{ url_for('static', filename='animation/bars.svg' ) }}" alt="Loading" />
     </button>
     <div id="result" class="result"></div>
     <br />
@@ -49,10 +53,10 @@
 
     <button hx-get="/get-status" hx-target="this">Check Server Status</button>
 
-    <div class="user-card" style="border: 1px solid gray; padding: 10px">
+    <div class="user-card">
         <h4>User Profile: Rana</h4>
 
-        <button hx-delete="/user/1" hx-target="closest .user-card">
+        <button hx-delete=" /user/1" hx-target="closest .user-card">
             Delete User
         </button>
     </div>
@@ -137,6 +141,12 @@
         Get Help Quickly (No Popup!)
     </button>
 </div>
+
+{% endblock %}
+
+
+{% block my_script %}
+
 
 <script nonce="{{g.nonce}}">
     async function swalConfirm() {
