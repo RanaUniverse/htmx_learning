@@ -32,7 +32,7 @@ def generate_nonce():
 def modefy_headers(response: Response):
     response.headers["Content-Security-Policy"] = (
         f"default-src 'self'; "
-        f"script-src 'self' 'nonce-{g.nonce}';"
+        f"script-src 'self' 'nonce-{g.nonce}';"  # TODO i will delete this
         f"style-src 'self' 'nonce-{g.nonce}';"
     )
     return response
@@ -93,9 +93,7 @@ def delete_account():
     # htmx replaces the button with whatever HTML text we return here!
     print("Request Came Now")
     return """
-    <div style="color: #dc3545; font-weight: bold; margin-top: 20px;">
         💔 Your account has been permanently deleted. We are sad to see you go!
-    </div>
     """
 
 
@@ -129,6 +127,11 @@ def two_page2():
 @app.route("/hello")
 def hello_small():
     return "<p>Done!</p>"
+
+
+@app.route("/help")
+def help_fun():
+    return "This is Help msg"
 
 
 @app.route("/lazy")

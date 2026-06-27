@@ -8,6 +8,7 @@
 <main>
     Nonce Value is:
     <b> {{g.nonce}} </b>
+    <button id="btn">Click Me it has js</button>
 
     <button hx-get="/messages">Load Messages</button>
 
@@ -137,16 +138,37 @@
 <div hx-confirm:inherited="Are you sure?">
     <button hx-delete="/account">Delete Account</button>
 
-    <button hx-get="/help" hx-disinherit="hx-confirm">
-        Get Help Quickly (No Popup!)
+    <button hx-get="/help">
+        Get Help Quickly (With Popup!)
     </button>
 </div>
+<br>
 
+<button hx-delete="/account">
+    Delete without any hx confirmation
+</button>
+<br>
+<!-- <button hx-delete="/account" hx-confirm="Are you sure you wish to delete your account?"> -->
+<button hx-delete="/account" hx-confirm="do you want to delte ur accoutn">
+    Delete My Account with default browser popup
+</button>
+<br>
+
+<button hx-get="/welcome" hx-confirm="Do you want to get welcome msg">
+    Get the welcome msg button
+</button>
+<br>
+
+<br>
+<button hx-delete="/account" id="delete-btn" hx-confirm="sometghign do you want">
+    > Delete My Account with cusotm popup using the sweet-alart
+</button>
+<button hx-delete="/users/1" hx-confirm="Delete this user?">
+    Delete
+</button>
 {% endblock %}
 
-
 {% block my_script %}
-
 
 <script nonce="{{g.nonce}}">
     async function swalConfirm() {
@@ -165,11 +187,83 @@
         // htmx receives this value and decides whether to send the request
         return result.isConfirmed;
     }
+
+
+    // const btn = document.getElementById("btn");
+
+    // btn.addEventListener("click", function () {
+    //     console.log("Button clicked!");
+    // });
+
+    // document.addEventListener("keydown", function (event) {
+    //     console.log(event.key);
+    // });
+
+    // document.addEventListener("mousemove", function (event) {
+    //     console.log(event.clientX, event.clientY);
+    // });
+
+    // document.body.addEventListener("htmx:confirm", function (event) {
+    //     console.log("Below is printing the event.detail value")
+    //     console.log(event.detail);
+    //     console.log(event.detail.ctx);
+    //     console.log("Below shows the qauestion");
+    //     console.log(event.detail.ctx.confirm);
+    //     console.log(event.detail.question)
+
+    // });
+
+    document.body.addEventListener("htmx:confirm", async function (event) {
+        console.log(event.detail.ctx)
+        console.log("Event funciton is runnign below")
+        event.preventDefault(); // this stop my browser poo style
+        console.log("As the default is prevent now i will shows the custom popup")
+        console.log("Now it will shows the custom popup with Sweet Alart2")
+        const confirmMessage = event.detail.ctx.confirm
+        console.log("Printing the confirmation msg below in js console")
+        console.log(confirmMessage)
+        console.log()
+
+        // but when this will not exists means the htmx-confirm will not there present
+        // i think this checking is unnecessary
+        if (!confirmMessage) {
+            return;
+        }
+        // i found this below from the docs i need to check
+        // https://four.htmx.org/reference/events/htmx-confirm#example
+        // Ignore elements that don't use hx-confirm
+        button_element = event.detail.ctx.target
+        has_hx_confirm = button_element.hasAttribute("hx-confirm")
+        console.log(button_element)
+        console.log("Does hx-confirm present in the button?", has_hx_confirm)
+        if (!has_hx_confirm) return;
+        // This upper is for extra security though i sure this will not 
+        // executes when hx-confirm not present but i keep this as the docs say this
+
+        const result = await Swal.fire({
+            title: confirmMessage,
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No"
+        });
+        console.log(result.isConfirmed)
+        if (result.isConfirmed) {
+            event.detail.issueRequest();   // continue request to my flask
+        } else {
+            event.detail.dropRequest();    // cancel request nothing to go my pytoh
+        }
+    })
+
+
 </script>
 
 
 
 <script nonce="{{g.nonce}}">
+    // This i make from ai so that a popup will run
+    //  in page statup just for checking i make this
     function showPopup() {
         const popup = document.createElement("div");
         popup.className = "popup";
