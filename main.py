@@ -31,9 +31,9 @@ def generate_nonce():
 @app.after_request
 def modefy_headers(response: Response):
     response.headers["Content-Security-Policy"] = (
-        f"script-src 'self' "
-        f"'nonce-{g.nonce}'; "
-        f"style-src 'self' 'nonce-{g.nonce}'; "
+        f"default-src 'self'; "
+        f"script-src 'self' 'nonce-{g.nonce}';"
+        f"style-src 'self' 'nonce-{g.nonce}';"
     )
     return response
 
