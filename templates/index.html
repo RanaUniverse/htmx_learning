@@ -144,7 +144,7 @@
 </div>
 <br>
 
-<button hx-delete="/account">
+<button hx-delete="/account" id="delete-no-confirm">
     Delete without any hx confirmation
 </button>
 <br>
@@ -212,6 +212,17 @@
     //     console.log(event.detail.question)
 
     // });
+
+    // this below is for apply in one element to check its details
+    htmx.on('#delete-no-confirm', 'htmx:before:request', (xyz) => {
+        console.log("This delte button without confirmation sended")
+    })
+
+
+    htmx.on('htmx:before:request', (evt) => {
+        console.log('Request starting: on full document', evt.detail);
+    });
+
 
     document.body.addEventListener("htmx:confirm", async function (event) {
         console.log(event.detail.ctx)
