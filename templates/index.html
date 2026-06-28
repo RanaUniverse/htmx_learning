@@ -216,6 +216,8 @@
     document.body.addEventListener("htmx:confirm", async function (event) {
         console.log(event.detail.ctx)
         console.log("Event funciton is runnign below")
+        console.log("Value of event.detail.quesiton is showing below:")
+        console.log(event.detail.question)
         event.preventDefault(); // this stop my browser poo style
         console.log("As the default is prevent now i will shows the custom popup")
         console.log("Now it will shows the custom popup with Sweet Alart2")
