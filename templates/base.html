@@ -63,35 +63,32 @@ templates/base.html
             height: auto;
         }
 
-        /* pencil default */
-        #editBtn svg {
+        /* Pencil icon */
+        .edit-btn svg {
             transition: color .3s;
         }
 
-
-        /* when typing */
-        .writing-animation svg {
+        /* Animation while editing */
+        .edit-btn.writing-animation svg {
             animation: writing 1.8s ease infinite;
             color: royalblue;
         }
 
-
-        /* when mouse hover */
-        #editBtn:hover svg {
+        /* Animation on hover */
+        .edit-btn:hover svg {
             animation: writing 1.8s ease infinite;
             color: royalblue;
         }
 
-
-        /* optional: make button nice */
-        #editBtn {
+        /* Button styling */
+        .edit-btn {
             background: transparent;
             border: none;
             padding: 10px;
             border-radius: 50%;
-            cursor: none;
+            cursor: pointer;
+            /* Better than cursor:none */
         }
-
 
 
 

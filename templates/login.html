@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% from 'partials/svg/pencil_icon.html' import edit_pencil %}
+
+
+{% block content %}
+
+<body>
+
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="card shadow border-0 col-md-8">
+
+                <form action="" method="post">
+                    <input id="csrf_token" name="csrf_token" type="hidden"
+                        value="IjViMGQyZDM5N2YwNWI5ODcxZDU1NmNlY2JmNTQ1NzFmZmFjYzY0ZDgi.akHymw.n7sH0ATr2VHpTBFVv13c8JEFVDs">
+                    <p class="text-success text-center fw-semibold">
+                        Register With Us For More Discounts
+                    </p>
+
+
+
+                    <div class="input-group mb-3">
+
+                        <div class="form-floating">
+                            <input class="form-control editable-input" id="first_name" name="first_name" type="text"
+                                placeholder=" " maxlength="50" minlength="1" required value="">
+                            <label for="first_name">First Name</label>
+                        </div>
+
+                        {{ edit_pencil() }}
+
+                    </div>
+
+
+
+
+
+                    <div class="input-group mb-3">
+
+                        <div class="form-floating">
+                            <input class="form-control editable-input" id="middle_name" name="middle_name" type="text"
+                                placeholder=" " maxlength="50" value="">
+                            <label for="middle_name">Middle Name</label>
+                        </div>
+
+                        {{ edit_pencil() }}
+
+                    </div>
+
+
+                    <div class="input-group mb-3">
+
+                        <div class="form-floating">
+                            <input class="form-control editable-input" id="last_name" name="last_name" type="text"
+                                placeholder=" " maxlength="50" value="">
+                            <label for="last_name">Last Name</label>
+                        </div>
+
+                        {{ edit_pencil() }}
+
+                    </div>
+
+
+
+                    <div class="input-group mb-3">
+
+                        <div class="form-floating">
+                            <input class="form-control editable-input" id="phone_no" name="phone_no" type="text"
+                                placeholder=" " maxlength="15" minlength="10" value="">
+                            <label for="phone_no">Phone No</label>
+                        </div>
+
+                        {{ edit_pencil() }}
+
+                    </div>
+
+
+
+
+                    <div class="input-group mb-3">
+
+                        <div class="form-floating">
+                            <input class="form-control editable-input" id="email_id" name="email_id" type="text"
+                                placeholder=" " value="">
+                            <label for="email_id">Email Id</label>
+                        </div>
+
+                        {{ edit_pencil() }}
+
+                    </div>
+
+
+
+                    <div class="input-group mb-3">
+                        <div class="form-floating">
+                            <input class="form-control" id="password" name="password" placeholder=" " required
+                                type="password" value="">
+                            <label for="password">Password</label>
+                        </div>
+                        <button type="button" class="input-group-text btn border btn-outline-warning"
+                            onclick="PassShowHideFun()">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="input-group mb-3">
+                        <div class="form-floating">
+                            <input class="form-control" id="confirm_password" name="confirm_password" placeholder=" "
+                                required type="password" value="">
+                            <label for="confirm_password">Confirm Password</label>
+                        </div>
+                        <button type="button" class="input-group-text btn border btn-outline-warning"
+                            onclick="PassShowHideFun()">
+                            <i id="eyeIcon" class="bi bi-eye"></i>
+                        </button>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center gap-2 mb-3">
+
+
+                        <a href="/login" class="btn btn-sm btn-outline-info w-75 w-sm-auto">
+                            Login With Existing Account
+                        </a>
+
+
+                        <div class="form-check">
+                            <input checked class="form-check-input" id="remember" name="remember" type="checkbox"
+                                value="y">
+                            <label class="form-check-label" for="remember">Remember Me</label>
+                        </div>
+
+
+                        <button type="button" class="btn btn-sm btn-outline-secondary w-75 w-sm-auto"
+                            id="guestToastBtn">
+                            Login As Guest
+                        </button>
+
+                    </div>
+
+                    <input class="btn btn-primary w-100 py-2 mb-3" id="submit" name="submit" type="submit"
+                        value="Create New Account">
+                </form>
+            </div>
+        </div>
+
+
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+
+            <div id="guestToast" class="toast bg-warning-subtle border border-warning shadow" role="alert"
+                aria-live="assertive" aria-atomic="true">
+
+                <div class="toast-header bg-warning">
+
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+                    <strong class="me-auto">
+                        Guest Login Disabled
+                    </strong>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="toast">
+                    </button>
+
+                </div>
+
+                <div class="toast-body">
+                    Guest login is not available right now.
+                    Please login with your account details.
+                </div>
+
+            </div>
+
+        </div>
+
+</body>
+
+{% endblock %}
+
+
+
+{% block my_script %}
+<script nonce="{{g.nonce}}">
+
+    document.querySelectorAll(".input-group").forEach(group => {
+
+        const input = group.querySelector(".editable-input");
+        const button = group.querySelector(".edit-btn");
+
+        if (!input || !button) return;
+
+        button.addEventListener("click", () => {
+            input.focus();
+            input.select();
+        });
+
+        input.addEventListener("focus", () => {
+            button.classList.add("writing-animation");
+        });
+
+        input.addEventListener("blur", () => {
+            button.classList.remove("writing-animation");
+        });
+
+    });
+</script>
+
+{% endblock %}

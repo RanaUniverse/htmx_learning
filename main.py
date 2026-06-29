@@ -139,6 +139,14 @@ def lazy():
     return "<p>Lazy loaded content 👀</p>"
 
 
+@app.route("/login")
+@app.route("/register")
+def login():
+    return render_template(
+        template_name_or_list="login.html",
+    )
+
+
 @app.route("/messages")
 def htmx1():
     global i
