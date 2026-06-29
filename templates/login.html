@@ -189,24 +189,20 @@
 <script nonce="{{g.nonce}}">
 
     const colors = [
-        "#0d6efd", // Bootstrap primary
-        "#198754", // green
+        "#0d6efd", // blue
         "#dc3545", // red
+        "#198754", // green
+        "#6610f2", // indigo
         "#fd7e14", // orange
-        "#6f42c1", // purple
-        "#20c997", // teal
-        "#e83e8c", // pink
-        "#ffc107"  // yellow
     ];
-
 
     document.querySelectorAll(".input-group").forEach(group => {
 
         const input = group.querySelector(".editable-input");
         const button = group.querySelector(".edit-btn");
-        if (!input || !button) return;
-
         const svg = button.querySelector("svg");
+        if (!input || !button || !svg) return;
+
 
         button.addEventListener("click", () => {
             input.focus();
