@@ -91,35 +91,41 @@ templates/base.html
         }
 
 
-
         @keyframes writing {
-
             0% {
-                transform: translateX(0) rotate(0deg);
+                transform: translate(0, 0) rotate(0deg);
             }
 
-            15% {
-                transform: translateX(4px) rotate(-18deg);
+            12% {
+                transform: translate(3px, 1px) rotate(-12deg);
             }
 
-            30% {
-                transform: translateX(8px) rotate(-8deg);
+            24% {
+                transform: translate(6px, -1px) rotate(-18deg);
             }
 
-            45% {
-                transform: translateX(12px) rotate(-18deg);
+            36% {
+                transform: translate(9px, 1px) rotate(-10deg);
+            }
+
+            48% {
+                transform: translate(12px, -1px) rotate(-18deg);
             }
 
             60% {
-                transform: translateX(16px) rotate(-8deg);
+                transform: translate(15px, 1px) rotate(-10deg);
             }
 
-            75% {
-                transform: translateX(12px) rotate(-18deg);
+            72% {
+                transform: translate(18px, -1px) rotate(-18deg);
+            }
+
+            84% {
+                transform: translate(10px, 0) rotate(-8deg);
             }
 
             100% {
-                transform: translateX(0) rotate(0deg);
+                transform: translate(0, 0) rotate(0deg);
             }
         }
     </style>
